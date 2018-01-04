@@ -91,10 +91,9 @@ export class PesananPage {
 
     this.params['method'] = this.arr[e].method;
     this.todo['pay'] = this.arr[e].pay;
-    // console.log(this.arr[e].method);
-    // console.log(this.arr[e].method);
+    
     console.log(this.todo);
-    // console.log(su);
+    
     
   }
 
