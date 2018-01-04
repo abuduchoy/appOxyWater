@@ -14,7 +14,7 @@ import { SummaryResolver } from '@angular/compiler';
 export class PesananPage {
   todo: any = {};
   objPay: any;
-  
+
   array: any;
   arr = ({
     0: ({ 'method': 'Kirim ke lokasi', 'pay': '2000' }),
@@ -89,8 +89,8 @@ export class PesananPage {
 
   setMethodSend(e: any, total: any) {
 
-    // this.params['method'] = this.arr[e].method;
-    // this.todo['pay'] = this.arr[e].pay;
+    this.params['method'] = this.arr[e].method;
+    this.todo['pay'] = this.arr[e].pay;
     // console.log(this.arr[e].method);
     // console.log(this.arr[e].method);
     console.log(this.todo);
