@@ -89,11 +89,10 @@ export class PesananPage {
 
   setMethodSend(e: any, total: any) {
 
-    this.params['method'] = this.arr[e].method;
+    this.todo['method'] = this.arr[e].method;
     this.todo['pay'] = this.arr[e].pay;
     
     console.log(this.todo);
-    
     
   }
 
