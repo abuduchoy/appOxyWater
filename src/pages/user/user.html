@@ -1,0 +1,49 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>user</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<div class="card-background-page" *ngFor="let id of identitas">
+  <ion-card>
+    <img src="assets/img/bg_ (1).jpg"/>
+    <ion-item class="card-img item-hiden">
+        <ion-avatar>
+          <img src="assets/img/{{id.foto}}"/>
+        </ion-avatar>
+      </ion-item>
+    <div class="card-title">{{id.nama}}</div>
+    <div class="card-subtitle">{{id.level}}</div>
+  </ion-card>
+
+
+  <ion-card>
+    <ion-list>
+      <ion-item>  
+        <h2>No. Telp</h2>
+        <p>{{id.telp}}</p>
+
+        <h2>Alamat</h2>
+        <p>{{id.almOpt}}</p>
+        <p>{{id.alamat}}</p>
+        <p>{{message}}</p>
+
+      </ion-item>
+    </ion-list>
+</ion-card>
+
+  <ion-fab left bottom>
+    <button ion-fab color="light"><ion-icon name="arrow-dropleft"></ion-icon></button>
+    <ion-fab-list side="right">
+      <button ion-fab (click)="getPoin();" ><ion-icon name="ribbon"></ion-icon></button>
+      <button ion-fab (click)="getSetting();" ><ion-icon name="settings"></ion-icon></button>
+      <button ion-fab (click)="getInfo();" ><ion-icon name="information-circle"></ion-icon></button>
+      <button ion-fab (click)="getLogOut();" ><ion-icon name="log-out"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+</div>
+</ion-content>

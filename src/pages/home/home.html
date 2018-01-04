@@ -1,14 +1,53 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Oxy Water App
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content class="card-background-page">
+
+  <ion-card>
+    <img src="assets/img/bg_oxy2.png" />
+    <div class="card-title"></div>
+    <div class="card-subtitle"></div>
+  </ion-card>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let btn of btnBarang">
+        <button (click)="getPesan(btn.id);" ion-button full item-end icon-left>
+    <ion-icon name="chatbubbles"></ion-icon>  {{btn.nama}}</button>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+  <ion-list>
+    <!-- <ion-item *ngFor="let i of obj" (click)="getKategori(todo[i].id);" > -->
+        <ion-item *ngFor="let i of obj" (click)="getConfirmPesanan(todo[i].id);" >
+        
+      <!-- <ion-thumbnail item-start> -->
+        <!-- <img src="{{src}}barang/{{todo[i].foto1}}"> -->
+        <!-- <img src="http://192.168.194.1/oxy/public/images/barang/{{todo[i].foto1}}"> -->
+      <!-- </ion-thumbnail> -->
+      <h2>{{todo[i].nama}}</h2>
+      <p>{{todo[i].deskripsi}},-</p>
+      <button ion-button clear item-end>Pesan</button>
+      <!-- <button ion-button clear item-end (click)="getDetailBarang(todo[i].id);">View</button> -->
+    </ion-item>
+  </ion-list>
+  <ion-fab right top>
+      <button ion-fab color="danger" *ngIf="sumKeranjang > 0" (click)="getKeranjang();">{{sumKeranjang}}</button>
+    
+    <button ion-fab color="danger" *ngIf="sumKeranjang == 0"><ion-icon name="cart"></ion-icon></button>
+    <!-- 
+      
+      <ion-fab-list side="right">
+      <button ion-fab (click)="getPoin();" ><ion-icon name="ribbon"></ion-icon></button>
+      <button ion-fab (click)="getSetting();" ><ion-icon name="settings"></ion-icon></button>
+      <button ion-fab (click)="getInfo();" ><ion-icon name="information-circle"></ion-icon></button>
+      <button ion-fab (click)="getLogOut();" ><ion-icon name="log-out"></ion-icon></button>
+    </ion-fab-list> -->
+  </ion-fab>
 </ion-content>

@@ -1,0 +1,34 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>signup</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<ion-list>
+        <ion-item>
+            <ion-label floating>Nama Lengkap</ion-label>
+            <ion-input type="text" [(ngModel)]="nama" name="nama" ></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>No Telp</ion-label>
+            <ion-input type="text" [(ngModel)]="telp" name="telp"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Username</ion-label>
+            <ion-input type="text" [(ngModel)]="username" name="username"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Password</ion-label>
+            <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
+        </ion-item>
+    </ion-list>
+
+    <div padding>
+        <button ion-button block (click)="insertDataPelanggan();" >Daftar</button>
+    </div>
+
+</ion-content>

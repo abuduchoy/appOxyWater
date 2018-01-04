@@ -1,0 +1,10 @@
+$ ionic start appOxyWater blank
+
+//plug in storage instal 
+$ ionic cordova plugin add cordova-sqlite-storage
+$ npm install --save @ionic/storage
+
+// go platform
+$ ionic cordova platform add android
+$ ionic build android
+

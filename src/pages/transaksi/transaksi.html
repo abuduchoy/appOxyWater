@@ -1,0 +1,48 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>transaksi</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div padding *ngIf="access">
+    <ion-card *ngFor="let key of obj">
+
+      <!-- <img src="assets/img/bjork-live.jpg"/> -->
+
+      <ion-card-content>
+        <ion-card-title>
+          Bukti Transaksi
+        </ion-card-title>
+        <p>Nama Barang : {{todo[key].nama_barang}}</p>
+        <p>Tanggal Pemesanan : {{todo[key].tgl_pesan}}</p>
+        <p>Metode Bayar : {{todo[key].metode_bayar}}</p>
+        <p>Total Pembayaran : {{todo[key].total}}</p>
+      </ion-card-content>
+
+      <ion-item>
+        <ion-icon name='megaphone' item-start style="color: #d03e84"></ion-icon>
+        Status
+        <ion-badge item-end>{{todo[key].status}}</ion-badge>
+      </ion-item>
+
+      <!-- <ion-item>
+        <ion-icon name='chatbubbles' item-start style="color: red"></ion-icon>
+        Tanya Penjual
+        <button ion-button item-end icon-left small>
+        <ion-icon name="chatbubbles"></ion-icon>
+        Pesan
+      </button>
+      </ion-item> -->
+
+    </ion-card>
+
+    
+  </div>
+  <!-- <ion-fab left bottom>
+      <button ion-fab color="danger"><ion-icon name="chatbubbles"></ion-icon></button>
+    </ion-fab> -->
+</ion-content>

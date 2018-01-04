@@ -1,23 +1,25 @@
 .ios, .md {
-
-page-home {
-
-	.card-background-page {
+ 
+    page-user {
+    .card-background-page {
 
   ion-card{
     position: relative;
     text-align: center;
   }
 
-  .buttonCss {
-    button.alert-button.exit-button{
-      background: red;
-    }
+  .card-img {
+    position: absolute;
+    top: 20%;
+    font-size: 2.0em;
+    width: 100%;
+    font-weight: bold;
+    color: #fff;
   }
 
   .card-title {
     position: absolute;
-    top: 36%;
+    top: 66%;
     font-size: 2.0em;
     width: 100%;
     font-weight: bold;
@@ -27,19 +29,24 @@ page-home {
   .card-subtitle {
     font-size: 1.0em;
     position: absolute;
-    top: 52%;
+    top: 82%;
     width: 100%;
     color: #fff;
   }
 
   ion-avatar > img {
 
-  	padding: auto;
+    padding: auto;
             margin: auto;
             width: 100px;
             height: auto;
   }
 
+  .item-hiden {
+    background: transparent !important;
+  }
+
 }
-}
+    }
+ 
 }

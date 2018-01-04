@@ -1,0 +1,43 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>pesan</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list *ngIf="access == false">
+    <ion-item>
+      <p>{{alert}}</p>
+      <button ion-button clear item-end (click)="getSettingsAddress();">Atur</button>
+    </ion-item>
+  </ion-list>
+      <div *ngIf="access == true">
+
+      <div *ngFor="let arr of arrBarang" >
+        <ion-list>
+
+          <ion-item>
+            <h2>Pesanan</h2>
+            <p>{{arr.nama_barang}}</p>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Jumlah</ion-label>
+            <ion-input type="number" [(ngModel)]="todo.jumlah" name="todo.jumlah" min="1" max="20" ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Jenis Pengiriman</ion-label>
+            <ion-select [(ngModel)]="send" name="send" (ionChange)="setMethodSend($event);">
+              <ion-option *ngFor="let pay of objPay" value="{{pay}}">{{array[pay].method}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+        <div padding>
+          <button ion-button block (click)="insertDataPesanan(arr.id);">Pesan</button>
+        </div>
+      </div>
+    </div>
+  
+</ion-content>

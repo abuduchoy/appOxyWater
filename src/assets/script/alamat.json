@@ -1,0 +1,19 @@
+{"alamat":[{
+	"kecamatan":"Genuk",
+	"kelurahan" : [
+	{"kel":"Muktiharjo", "pos":"50111"},
+	{"kel":"Terboyo Kulon", "pos":"50112"},
+	{"kel":"Terboyo Wetan", "pos":"50112"},
+	{"kel":"Penggaron Lor", "pos":"50113"},
+	{"kel":"Bangetayu Kulon", "pos":"50115"},
+	{"kel":"Bangetayu Wetan", "pos":"50115"},
+	{"kel":"Kudu", "pos":"50116"},
+	{"kel":"Sembungharjo", "pos":"50116"},
+	{"kel":"Banjardowo", "pos":"50117"},
+	{"kel":"Gebangsari", "pos":"50117"},
+	{"kel":"Karangroto", "pos":"50117"},
+	{"kel":"Gebangsari", "pos":"50117"},
+	{"kel":"Trimulyo", "pos":"50118"},
+	{"kel":"Genuksari", "pos":"50231"}
+	]
+}]}

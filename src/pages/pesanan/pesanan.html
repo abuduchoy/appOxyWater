@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Pesanan</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list inset>
+    <ion-list-header>Barang Pesanan</ion-list-header>
+    <button ion-item *ngFor="let y of kys" (click)="itemSelected(y);">
+      {{ dataPesanan[y].nama_barang }}
+      <ion-badge item-end>{{dataPesanan[y].jumlah}}</ion-badge>
+    </button>
+
+    <ion-item>
+      <ion-label floating>Jenis Pengiriman</ion-label>
+      <ion-select [(ngModel)]="send" name="send" (ionChange)="setMethodSend($event, sum);">
+        <ion-option *ngFor="let pay of objPay" value="{{pay}}">{{array[pay].method}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <b>Total</b>
+      <ion-badge item-end color="success">Rp.{{sum}}</ion-badge>
+      
+    </ion-item>
+
+  </ion-list>
+  <ion-list>
+    <div padding>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6>
+              <button ion-button small round (click)="deleteMessage();">Batal</button>      
+          </ion-col>
+          <ion-col col-6>
+              <button ion-button small round color="danger" (click)="bayMessage();">Pesan</button>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+      
+      
+    </div>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,40 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Ubah Profil</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+  
+  <ion-list>
+      <ion-item>
+          <ion-label floating>Nama Lengkap</ion-label>
+          <ion-input type="text" [(ngModel)]="todo.nama" name="nama" value="{{todo.nama}}" ></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label floating>No Telp</ion-label>
+          <ion-input type="text" [(ngModel)]="todo.telp" name="telp"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Kecamatan</ion-label>
+        <ion-select  [(ngModel)]="keyKecamatan" name="keyKecamatan" (ionChange)="getKecamatan($event, keyKecamatan);" >
+          <ion-option *ngFor="let key of objKeyKecamatan"  value="{{key}}"  >{{kecamatan[key].kecamatan}}</ion-option>   
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Kelurahan</ion-label>
+        <ion-select  [(ngModel)]="keyKelurahan" name="keyKelurahan" (ionChange)="getKelurahan($event, keyKelurahan);" >
+          <ion-option *ngFor="let key of objKeyKelurahan"  value="{{key}}"  >{{kecamatan[keys].kelurahan[key].desa}}</ion-option>
+        </ion-select>
+      </ion-item>
+          <ion-item>
+              <ion-label floating>Alamat Lengkap</ion-label>
+              <ion-input type="text" [(ngModel)]="todo.alamat" name="alamat"></ion-input>
+          </ion-item>
+  </ion-list>
+  <div padding>
+      <button ion-button block (click)="updateDataPelanggan();" >Simpan</button>
+  </div>
+  
+</ion-content>

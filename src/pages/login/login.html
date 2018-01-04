@@ -1,0 +1,43 @@
+<ion-header>
+
+	<ion-navbar hideBackButton *navbar>
+		<ion-title>login</ion-title>
+	</ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="login-content">
+	<div class="login-box">
+		<form [formGroup]="registrationForm" (ngSubmit)="logForm()">
+			<ion-row>
+				<ion-col>
+					<ion-list inset>
+
+						<ion-item>
+							<ion-label floating>Username</ion-label>
+							<ion-input type="text" formControlName="username" name="username" [(ngModel)]="username"></ion-input>
+						</ion-item>
+
+						<ion-item>
+							<ion-label floating>Password</ion-label>
+							<ion-input type="password" formControlName="password" name="password" [(ngModel)]="password"></ion-input>
+						</ion-item>
+
+					</ion-list>
+
+					<div padding>
+						<button ion-button block type="submit" [disabled]="!registrationForm.valid">Masuk</button>
+
+					</div>
+				</ion-col>
+			</ion-row>
+		</form>
+		<ion-row>
+			<ion-col class="signup-col">
+			
+				<button ion-button block color="danger" (click)="goSignup();">Daftar</button>
+			</ion-col>
+		</ion-row>
+	</div>
+</ion-content>
