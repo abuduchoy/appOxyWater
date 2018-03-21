@@ -18,29 +18,31 @@
     <ion-row>
       <ion-col *ngFor="let btn of btnBarang">
         <button (click)="getPesan(btn.id);" ion-button full item-end icon-left>
-    <ion-icon name="chatbubbles"></ion-icon>  {{btn.nama}}</button>
+          <ion-icon name="chatbubbles"></ion-icon> {{btn.nama}}</button>
       </ion-col>
 
     </ion-row>
   </ion-grid>
   <ion-list>
     <!-- <ion-item *ngFor="let i of obj" (click)="getKategori(todo[i].id);" > -->
-        <ion-item *ngFor="let i of obj" (click)="getConfirmPesanan(todo[i].id);" >
-        
+    <ion-item *ngFor="let i of obj" (click)="getConfirmPesanan(todo[i].id);">
+
       <!-- <ion-thumbnail item-start> -->
-        <!-- <img src="{{src}}barang/{{todo[i].foto1}}"> -->
-        <!-- <img src="http://192.168.194.1/oxy/public/images/barang/{{todo[i].foto1}}"> -->
+      <!-- <img src="{{src}}barang/{{todo[i].foto1}}"> -->
+      <!-- <img src="http://192.168.194.1/oxy/public/images/barang/{{todo[i].foto1}}"> -->
       <!-- </ion-thumbnail> -->
       <h2>{{todo[i].nama}}</h2>
-      <p>{{todo[i].deskripsi}},-</p>
+      <p>{{todo[i].hrg}},- : {{todo[i].deskripsi}}</p>
       <button ion-button clear item-end>Pesan</button>
       <!-- <button ion-button clear item-end (click)="getDetailBarang(todo[i].id);">View</button> -->
     </ion-item>
   </ion-list>
   <ion-fab right top>
-      <button ion-fab color="danger" *ngIf="sumKeranjang > 0" (click)="getKeranjang();">{{sumKeranjang}}</button>
-    
-    <button ion-fab color="danger" *ngIf="sumKeranjang == 0"><ion-icon name="cart"></ion-icon></button>
+    <button ion-fab color="danger" *ngIf="sumKeranjang > 0" (click)="getKeranjang();">{{sumKeranjang}}</button>
+
+    <button ion-fab color="danger" *ngIf="sumKeranjang == 0">
+      <ion-icon name="cart"></ion-icon>
+    </button>
     <!-- 
       
       <ion-fab-list side="right">

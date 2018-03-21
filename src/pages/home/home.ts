@@ -1,10 +1,10 @@
-import { AppModule } from '../../app/app.module';
+// import { AppModule } from '../../app/app.module';
 
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { LoginPage } from '../login/login';
-import { SignupPage } from '../signup/signup';
+// import { SignupPage } from '../signup/signup';
 import { DetailbarangPage } from '../detailbarang/detailbarang';
 
 import { Storage } from '@ionic/storage';
@@ -15,7 +15,7 @@ import { PesananPage } from '../pesanan/pesanan';
 
 import { global } from './global';
 import { AlertController } from 'ionic-angular';
-import { NgModel } from '@angular/forms/src/directives/ng_model';
+// import { NgModel } from '@angular/forms/src/directives/ng_model';
 
 
 @Component({
@@ -34,36 +34,39 @@ export class HomePage {
   db = {};
   sumKeranjang = 0;
 
+  desk;
+  nama;
+  img;
+  hrg;
+
   constructor(public navCtrl: NavController, public storage: Storage, public http: Http, public alertCtrl: AlertController) {
     //console.log(AppModule.accessLogin);
-    var url = global.url('kategori');
+    // var url = global.url('kategori');
+    var url = global.url('barangJoinKategori');
 
     this.http.get(url)
       .map(res => res.json())
       .subscribe(data => {
         this.todo = data.result;
         this.obj = Object.keys(this.todo);
-
+        console.log(this.todo);
       }) // end http
+    
+    
 
     this.storage.get('myStore').then((data) => {
-
       this.idUser = data;
-
     });
 
     this.storage.get('dataBelanja').then((data) => {
       if (data != null) {
-
 
         let sum = Object.keys(data);
         this.sumKeranjang = sum.length;
         // console.log(data);
         this.db = data;
       }
-
     });
-
   }
 
   getLogin() {
@@ -84,10 +87,19 @@ export class HomePage {
   }
 
   getConfirmPesanan(id) {
+    for (let i = 0; i < this.obj.length; i++) {
+      if (this.todo[i].id == id) {
+        this.nama = this.todo[i].nama;
+        this.desk = this.todo[i].deskripsi;
+        this.hrg = this.todo[i].hrg;
+        this.img = this.todo[i].img;
+      }
+    }
     this.getShowBarang(id);
-
     let msg = this.alertCtrl.create({
-      title: "Konfirmasi Pesan",
+      title: "<img class='img' src='" + global.images() + "barang/" + this.img + "' />",
+      subTitle: this.nama,
+      message: "" + this.hrg + ",- :" + this.desk + "",
       inputs: [{
         name: 'jumlah',
         type: 'number',
@@ -117,7 +129,8 @@ export class HomePage {
                 this.db[0] = this.params;
                 this.storage.set('dataBelanja', this.db);
               }
-              window.location.reload();
+              // window.location.reload();
+              this.navCtrl.setRoot(this.navCtrl.getActive().component);
             } // end if
           } // end for
         }
@@ -142,7 +155,7 @@ export class HomePage {
                 this.storage.set('dataBelanja', this.db);
               }
               // window.location.reload();
-              
+
             } // end if
           } // end for
 
@@ -164,16 +177,19 @@ export class HomePage {
       .map(res => res.json())
       .subscribe(data => {
         this.arrBarang = data.result;
-        this.params['nama_barang'] = data.result[0].nama_barang;
-        this.params['hrgbarang'] = data.result[0].harga;
-        this.params['idBarang'] = data.result[0].id;
+        this.params['nama_barang'] = data.result.nama_barang;
+        this.params['hrgbarang'] = data.result.harga;
+        this.params['idBarang'] = data.result.id;
+        this.params['img'] = data.result.foto1;
+        this.params['desk'] = data.result.deskripsi;
 
-        return this.params;
-      })
+      });
+    return this.params;
+
   }
 
   getKeranjang() {
-    this.navCtrl.push(PesananPage, {user_id: this.idUser});
+    this.navCtrl.push(PesananPage, { user_id: this.idUser });
   }
 
 }

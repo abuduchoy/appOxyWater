@@ -17,7 +17,7 @@ import { PesananPage } from '../pages/pesanan/pesanan';
 import { UpuserPage } from '../pages/upuser/upuser';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
-import { DetailbarangPage } from '../pages/detailbarang/detailbarang';
+// import { DetailbarangPage } from '../pages/detailbarang/detailbarang';
 
 import { IonicStorageModule } from '@ionic/storage';
 
@@ -34,8 +34,8 @@ import { IonicStorageModule } from '@ionic/storage';
     SignupPage,
     UpuserPage,
     PesanPage,
-    PesananPage,
-    DetailbarangPage
+    PesananPage
+    // DetailbarangPage
   ],
   imports: [
     BrowserModule,
@@ -54,8 +54,8 @@ import { IonicStorageModule } from '@ionic/storage';
     SignupPage,
     UpuserPage,
     PesanPage,
-    PesananPage,
-    DetailbarangPage
+    PesananPage
+    // DetailbarangPage
   ],
   providers: [
     StatusBar,

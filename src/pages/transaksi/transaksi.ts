@@ -31,7 +31,7 @@ export class TransaksiPage {
     
     var url = global.url('transaksi&id=' + id);
     
-    console.log(url);
+    // console.log(url);
 
     this.http.get(url)
       .map( res => res.json())
@@ -44,14 +44,30 @@ export class TransaksiPage {
         } else {    
           this.access = true;
           this.obj = Object.keys(this.todo);
-          // console.log(this.obj);
+
         }
-        // console.log(this.todo['id']);
+        
+        
+        for(let i=0; i < this.obj.length; i++){
+          var r = this.todo[i].total.split('+');
+          // console.log(r);
+          this.todo[i].total = r[2];
+        }
+
+        // var t = this.todo['total'];
+        
+        // var z = {};
+        // z = t.split('+');
+        console.log(this.todo);
         
       })
   } // end funct...
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TransaksiPage');
+  }
+
+  refreshPage(){
+    this.navCtrl.setRoot(this.navCtrl.getActive().component);
   }
 }

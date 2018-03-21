@@ -2,8 +2,11 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 import { HomePage } from '../home/home';
+import { global } from '../home/global';
+import { UpuserPage } from '../upuser/upuser';
 import { Storage } from '@ionic/storage';
-import { SummaryResolver } from '@angular/compiler';
+// import { SummaryResolver } from '@angular/compiler';
+import { Http, Headers, RequestOptions } from '@angular/http';
 
 
 @IonicPage()
@@ -20,26 +23,30 @@ export class PesananPage {
     0: ({ 'method': 'Kirim ke lokasi', 'pay': '2000' }),
     1: ({ 'method': 'Ambil di toko', 'pay': 0 })
   })
+
   dataPesanan: any;
   kys: any;
   sum: any = 0;
+  alert: any;
+  access: boolean = false;
 
   public params: String;
   public nama_barang: String;
 
-  
-  db: {};
+
+  db = {};
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public alertCtrl: AlertController,
-    public storage: Storage
+    public storage: Storage,
+    public http: Http
   ) {
-    this.indexData();
     this.todo['idUser'] = navParams.get("user_id");
 
-    console.log(this.todo);
+    this.indexData();
+    
   }
 
   ionViewDidLoad() {
@@ -48,11 +55,55 @@ export class PesananPage {
 
   deleteMessage() {
     this.storage.remove('dataBelanja');
-    this.navCtrl.push(HomePage);
+    this.navCtrl.setRoot(HomePage);
+    
   }
 
   bayMessage() {
+    // console.log(this.todo);
+    this.storage.get('dataBelanja').then(data => {
+      let e = Object.keys(data);
+      for (let i = 0; i < e.length; i++) {
+        this.db[i] = { 'idBarang': data[i].idBarang, 'jumlah': data[i].jumlah, 'subTotal': data[i].total };
+      }
 
+      // console.log(data);
+      this.todo['buys'] = this.db;
+      this.todo['superTotal'] = parseInt(this.todo['total']) + parseInt(this.todo['pay']);
+      this.todo['superTotal'] = String(this.todo['superTotal']);
+      // console.log(this.todo);
+
+      let infoAlert = this.alertCtrl.create({
+        title: 'Konfirmasi pesanan',
+        subTitle: '<p>Jumlah pasanan : ' + this.todo['total'] + '</p><p> Ongkos Pengiriman : ' + this.todo['pay'] + ' </p><p> Total belanja : ' + this.todo['superTotal'] + ' </p>',
+        buttons: [{
+          text: "Pesan",
+          handler: () => {
+            // console.log(this.todo);
+            // call database in localhost
+            var headers = new Headers();
+            headers.append('Content-Type', 'application/x-www-form-urlencoded');
+            let option = new RequestOptions({ headers: headers });
+
+            var url = global.url('insertBelanja');
+
+
+            this.http.post(url, JSON.stringify(this.todo), option)
+              .subscribe(data => {
+                // console.log(data['_body']);
+                this.confirmPemesanan(data['_body']);
+              })
+          }
+
+        }, {
+          text: 'Tutup'
+        }]
+        // subTitle : ' '
+      });
+
+      infoAlert.present();
+      // this.to
+    });
   }
 
   itemSelected(e) {
@@ -76,6 +127,7 @@ export class PesananPage {
           text: 'Batal',
           handler: () => {
             console.log('Batal');
+            // this.navCtrl.setRoot(this.navCtrl.getActive().component, {user_id: this.todo['idUser']});
           }
         }]
 
@@ -84,16 +136,21 @@ export class PesananPage {
 
       // console.log(data[e]);
     });
-
   }
 
   setMethodSend(e: any, total: any) {
 
     this.todo['method'] = this.arr[e].method;
     this.todo['pay'] = this.arr[e].pay;
-    
-    console.log(this.todo);
-    
+
+    // this.todo['total'] = parseInt(this.todo['pay']) + parseInt(total);
+    this.todo['total'] = String(total);
+
+    this.sum = this.todo['total'];
+
+    // this.navCtrl.setRoot(this.navCtrl.getActive().component);
+    // console.log(this.todo);
+
   }
 
   changeStorageCart(e, change, array) {
@@ -104,30 +161,81 @@ export class PesananPage {
 
     this.storage.get('dataBelanja').then(data => {
       data[e] = array;
+      // console.log(data);
       // console.log(data[e]);
       this.storage.set('dataBelanja', data);
       // window.location.reload();
       this.indexData();
       // this.refreshPage();
-      this.navCtrl.setRoot(this.navCtrl.getActive().component);
+        this.navCtrl.setRoot(this.navCtrl.getActive().component, {user_id: this.todo['idUser']});
+      // })
+
+      
     });
   }
 
   indexData() {
     this.storage.get('dataBelanja').then((data) => {
       this.dataPesanan = data;
-      this.kys = Object.keys(data); // console.log(data);
+      this.kys = Object.keys(data); 
+      console.log(data);
       for (let i = 0; i < this.kys.length; i++) {
         this.sum += parseInt(this.dataPesanan[i].total);
       }
     })
 
+    
+
     this.objPay = Object.keys(this.arr);
     this.array = this.arr;
+
+    console.log(this.todo);
+    this.getCheckAddress(this.todo['idUser']);
 
   }
 
   refreshPage() {
     this.navCtrl.setRoot(this.navCtrl.getActive().component);
+  }
+
+  getCheckAddress(id) {
+    var url = global.url('cekAlamatPelanggan&id=' + id);
+
+    this.http.get(url)
+      .map(res => res.json())
+      .subscribe(data => {
+        if (data.result[0].alamat == '') {
+          this.alert = "Alamat anda belum lengkap !!";
+          this.access = false;
+        } // end if
+        else {
+          this.access = true;
+        }
+        // console.log(data.result);
+      })
+
+  }
+
+  getSettingsAddress() {
+    this.navCtrl.push(UpuserPage);
+  }
+
+  confirmPemesanan(msg) {
+    let message = this.alertCtrl.create({
+      title: 'Pesanan',
+      subTitle: msg,
+      buttons: [{
+        text: 'OK',
+        handler: () => {
+          //window.location.reload();
+          this.storage.remove('dataBelanja');
+          this.navCtrl.setRoot(HomePage, {user_id: this.todo['idUser']});
+
+        }
+      }]
+    });
+
+    message.present();
+
   }
 }

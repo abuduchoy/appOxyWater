@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { HomePage } from '../home/home';
+
 import { UpuserPage } from '../upuser/upuser';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-import { Validators, FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup } from "@angular/forms";
 
 import { AlertController } from 'ionic-angular';
 import { global } from '../home/global';
-import { Md5 } from '../login/md5';
+// import { Md5 } from '../login/md5';
 import { Storage } from '@ionic/storage';
 // import { FormGroup } from '@angular/forms/src/model';
 
@@ -136,11 +136,6 @@ export class PesanPage {
   }
 
   addDataPesanan(e) {
-
-    let addBarang = [
-      { 'name': 'Rahman', 'number': 1 },
-      { 'name': 'Andy', 'number': 2 }
-    ];
 
     this.todo['total'] = parseInt(this.todo['pay']) + (parseInt(this.todo['hrgbarang']) * parseInt(this.todo['jumlah']));
     this.todo['total'] = String(this.todo['total']);

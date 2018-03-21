@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { LoginPage } from '../login/login';
-import { SignupPage } from '../signup/signup';
+
 import { UpuserPage } from '../upuser/upuser';
 import { Storage } from '@ionic/storage';
 import { Http } from '@angular/http';
